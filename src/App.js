@@ -2,7 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
 import Dashboard from './components/dashboard.js'
 import Navbar from './components/navbar.js'
 
