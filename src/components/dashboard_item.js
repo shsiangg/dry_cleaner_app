@@ -3,18 +3,23 @@ import SubmittedItem from './submitted_item'
 import './dashboard.css'
 
 export default function DashboardItem(props) {
-  const [name, setName] = useState()
-  const [number, setNumber] = useState()
+  const [input, setInput] = useState({})
+  
+  const handleInputChange = (e) => setInput({
+    ...input,
+    [e.currentTarget.name]: e.currentTarget.value
+  })
 
 
   return (
     <div className={`dashboard-item ${props.uid}`} >
       <form onSubmit={(e) => props.handleSubmit(e, props.uid)}>
-        <input required  name="name" placeholder="Customer Name" value={name} onChange={(e) => setName(e.target.value)} ></input>
-        <input required pattern="\d{10}"  name="number" placeholder="Phone Number" value={number} onChange={(e) => setNumber(e.target.value)} ></input>
+        <input required  name="name" placeholder="Customer Name" onChange={handleInputChange} ></input>
+        <input required pattern="\d{10}"  name="number" placeholder="Phone Number" onChange={handleInputChange} ></input>
         <input type="submit" value="Submit" ></input>
       </form>
     </div>
+
   )
 
 }
