@@ -1,5 +1,4 @@
 import React , { useState, useEffect, useRef } from 'react';
-import SubmittedItem from './submitted_item'
 import './dashboard.css'
 
 export default function DashboardItem(props) {

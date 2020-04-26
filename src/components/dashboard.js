@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import './dashboard.css'
 import DashboardItem from './dashboard_item';
-import SubmittedItem from './submitted_item'
-import CompletedItem from './completed_item';
 
 export default function Dashboard(props) {
   const [items, setItems] = useState([{id: 0}])
