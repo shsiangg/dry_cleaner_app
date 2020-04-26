@@ -4,7 +4,8 @@ import './dashboard.css'
 export default function DashboardItem(props) {
   const [input, setInput] = useState({})
   const [itemState, setItemState] = useState('empty')
-  const [name, setName] = useState()
+  const [firstName, setFirstName] = useState()
+  const [surname, setSurname] = useState()
   const [number, setNumber] = useState()
   const [startTime, setStartTime] = useState()
   const [endTime, setEndTime] = useState()
@@ -18,7 +19,8 @@ export default function DashboardItem(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setName(e.target.name.value)
+    setFirstName(e.target.firstName.value)
+    setSurname(e.target.surname.value)
     setNumber(e.target.number.value)
     setItemState('submit')
     setStartTime(new Date().toLocaleString())
@@ -50,7 +52,9 @@ export default function DashboardItem(props) {
           <>
         <h2>{props.uid}</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <input required  name="name" placeholder="Customer Name" onChange={handleInputChange} ></input>
+          <input required  name="firstName" placeholder="First Name" onChange={handleInputChange} ></input>
+          <input required  name="surname" placeholder="Surame" onChange={handleInputChange} ></input>
+
           <input required pattern="\d{10}"  name="number" placeholder="Phone Number" onChange={handleInputChange} ></input>
           <input type="submit" value="Submit" ></input>
         </form>
@@ -61,7 +65,7 @@ export default function DashboardItem(props) {
        return ( 
        <div>
           Processing
-          <p>{name} {number}</p>
+          <p>{firstName} {surname} {number}</p>
           <p>Started at: {startTime}</p>
           <h3>Elapsed time: {timer}</h3>
           <h2>{props.uid}</h2>
@@ -76,7 +80,7 @@ export default function DashboardItem(props) {
         return (
         <>
           <h2>completed</h2>
-          <p>{name} {number}</p>
+          <p>{firstName} {surname} {number}</p>
           <p>Start time: {startTime}</p>
           <p>End time: {endTime}</p>
           <p>Time Elapsed: {seconds}</p>
