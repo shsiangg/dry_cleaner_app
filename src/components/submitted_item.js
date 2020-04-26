@@ -19,6 +19,8 @@ export default function SubmittedItem(props) {
   return (
     <div>
       Submitted
+      <p>{props.name}</p>
+      <p>{props.number}</p>
       <button onClick={() => handleCompleted()}>Complete Order</button>
     </div>
   )

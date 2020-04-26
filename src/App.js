@@ -1,9 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ReactDOM from 'react-dom';
 import Dashboard from './components/dashboard.js'
 import Navbar from './components/navbar.js'
+import './App.css'
 
 function App() {
 

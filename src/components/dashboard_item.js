@@ -1,32 +1,22 @@
-import React , { useState } from 'react';
+import React , { useState, useEffect } from 'react';
 import SubmittedItem from './submitted_item'
 import './dashboard.css'
 
 export default function DashboardItem(props) {
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleSubmit = () => {
-    console.log("submitted")
-    setSubmitted(true)
-  }
+  const [name, setName] = useState()
+  const [number, setNumber] = useState()
 
 
-  if (submitted) {
-    return (
-      <SubmittedItem />
-    )
-  } else {
-      return (
-        <div className="dashboard-item">
-          <form>
-            <input type="text" name="name" placeholder="Customer Name"></input>
-            <input type="tel" name="number" placeholder="Phone Number"></input>
-            <input type="submit" value="Submit" onClick={() => handleSubmit()}></input>
-          </form>
-        </div>
-      )
-  }
-  
+  return (
+    <div className={`dashboard-item ${props.uid}`} >
+      <form onSubmit={(e) => props.handleSubmit(e, props.uid)}>
+        <input required  name="name" placeholder="Customer Name" value={name} onChange={(e) => setName(e.target.value)} ></input>
+        <input required pattern="\d{10}"  name="number" placeholder="Phone Number" value={number} onChange={(e) => setNumber(e.target.value)} ></input>
+        <input type="submit" value="Submit" ></input>
+      </form>
+    </div>
+  )
+
 }
 
 /*
