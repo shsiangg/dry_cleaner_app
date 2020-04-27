@@ -9,6 +9,8 @@
   display: grid;
   grid-template-columns: 1fr 60% 1fr;
   justify-content: center;
+  border-radius: 20px;
+
 }
 
 .dashboard-item.empty {
