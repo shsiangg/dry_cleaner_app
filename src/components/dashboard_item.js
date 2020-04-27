@@ -44,6 +44,14 @@ export default function DashboardItem(props) {
   }, itemState === 'complete' ? null : (itemState === 'submit' ? 1000 : null) );
 
 
+  const handleKeyUp = (e) => {
+    if (e.target.value.length === e.target.maxLength) {
+      let num2 = document.querySelector("input[name='number2']")
+      let num3 = document.querySelector("input[name='number3']")
+      e.target.name === 'number1' ? num2.focus() : num3.focus()
+    }
+    
+  }
 
   let content = () => {
     switch (itemState) {
@@ -51,9 +59,20 @@ export default function DashboardItem(props) {
         return (
           <div className={`dashboard-item empty ${props.uid}`} >
         <form className="item-content" onSubmit={(e) => handleSubmit(e)}>
-          <label><i style={{fontSize: "0.8rem"}}>Order #: {props.uid} </i></label><br></br>
-          <input required  type='text' name="lastName" placeholder="Last Name" onChange={handleInputChange} ></input><br></br>
-          <input required type='text' pattern="\d{10}"  name="number" placeholder="Phone Number" onChange={handleInputChange} ></input><br></br>
+          <label><i style={{fontSize: "0.8rem"}}>Order #: {props.uid} </i></label>
+          <label>Last Name</label>
+          <input required  type='text' name="lastName" placeholder="Johnson" onChange={handleInputChange} ></input>
+          <label>Phone Number</label>
+          <div>
+          <input required type='tel' size="3" minLength="3" maxLength="3" pattern="\d{3}" name="number1" placeholder="123" 
+          onChange={handleInputChange}
+          onKeyUp={handleKeyUp}></input>
+          <input required type='tel' size="3" minLength="3" maxLength="3" pattern="\d{3}" name="number2" placeholder="456" 
+          onChange={handleInputChange}
+          onKeyUp={handleKeyUp}></input>
+          <input required type='tel' size="4 " minLength="4" maxLength="4" pattern="\d{4}" name="number3" placeholder="7890" 
+          onChange={handleInputChange}></input>
+          </div>
           <input type="submit" value="Submit" ></input>
         </form>
       </div>
@@ -66,8 +85,6 @@ export default function DashboardItem(props) {
           Order #: {props.uid}
           <button name="cancel" onClick={(e) => handleCancel(e, props.uid)}>Cancel Order</button>
          </i>
-
-                
           <h1 className="last-name">{lastName}</h1>
           <i style={{textAlign: 'center'}}> {number}</i><br></br>
           <p style={{fontSize: "0.7rem"}}>Started at: {startTime}</p>
