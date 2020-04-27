@@ -1,17 +1,91 @@
 .dashboard {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(200px, auto);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 300px;
   grid-gap: 10px;
 }
 
 .dashboard-item {
+  display: grid;
+  grid-template-columns: 1fr 60% 1fr;
+  justify-content: center;
+}
+
+.dashboard-item.empty {
+  background: white;
+}
+
+.dashboard-item.submitted {
   background: #ace9f8;
 }
-  
+
+.dashboard-item.canceled {
+  background: #f1bfbf;
+}
+
+.dashboard-item.completed {
+  background: #c2f0c4;
+}
+
+.item-content {
+  grid-column: 2 / 3;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.last-name {
+  text-align: center;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit], button[name=complete], button[name=completed] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover, button[name=complete]:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #c2f0c4;
+  color: #506451
+}
+
+button[name=cancel] {
+  float: right;
+}
+
+
 .add-order {
-  background: rgb(224, 217, 217);
+  background: #ffffff;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1px dashed rgb(151, 151, 151)  ;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.add-order:hover {
+  background: #ececec;
+
+
 }

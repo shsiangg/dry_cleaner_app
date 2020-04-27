@@ -21,7 +21,7 @@ export default function Dashboard(props) {
       })}
         
       <div className="dashboard-item add-order" type="button" onClick={() => addItem()}>
-      Add Order
+      <p style={{fontSize: "2rem", color: 'grey'}}>+</p>
       </div>
     </div>
   )

@@ -4,7 +4,6 @@ import './dashboard.css'
 export default function DashboardItem(props) {
   const [input, setInput] = useState({})
   const [itemState, setItemState] = useState('empty')
-  const [firstName, setFirstName] = useState()
   const [lastName, setLastName] = useState()
   const [number, setNumber] = useState()
   const [startTime, setStartTime] = useState()
@@ -19,7 +18,6 @@ export default function DashboardItem(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setFirstName(e.target.firstName.value)
     setLastName(e.target.lastName.value)
     setNumber(e.target.number.value)
     setItemState('submit')
@@ -36,6 +34,8 @@ export default function DashboardItem(props) {
   const handleCancel = (e) => {
     e.preventDefault()
     setItemState('canceled')
+    setEndTime(new Date().toLocaleString())
+
   }
   
   useInterval(() => {
@@ -49,43 +49,68 @@ export default function DashboardItem(props) {
     switch (itemState) {
       case 'empty':
         return (
-          <>
-        <h2>{props.uid}</h2>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input required  name="firstName" placeholder="First Name" onChange={handleInputChange} ></input>
-          <input required  name="lastName" placeholder="Last Name" onChange={handleInputChange} ></input>
-
-          <input required pattern="\d{10}"  name="number" placeholder="Phone Number" onChange={handleInputChange} ></input>
+          <div className={`dashboard-item empty ${props.uid}`} >
+        <form className="item-content" onSubmit={(e) => handleSubmit(e)}>
+          <label><i style={{fontSize: "0.8rem"}}>Order #: {props.uid} </i></label><br></br>
+          <input required  type='text' name="lastName" placeholder="Last Name" onChange={handleInputChange} ></input><br></br>
+          <input required type='text' pattern="\d{10}"  name="number" placeholder="Phone Number" onChange={handleInputChange} ></input><br></br>
           <input type="submit" value="Submit" ></input>
         </form>
-        <button name="cancel" onClick={(e) => handleCancel(e, props.uid)}>Cancel</button>      
-      </>
+      </div>
         )
       case 'submit':
        return ( 
-       <div>
-          Processing
-          <p>{firstName} {lastName} {number}</p>
-          <p>Started at: {startTime}</p>
-          <h3>Elapsed time: {timer}</h3>
-          <h2>{props.uid}</h2>
-          <button onClick={(e) => {handleComplete(e)}}>Complete Order</button>      
+        <div className={`dashboard-item submitted ${props.uid}`} >
+        <div className="item-content" >
+        <i style={{fontSize: "0.8rem"}}>
+          Order #: {props.uid}
+          <button name="cancel" onClick={(e) => handleCancel(e, props.uid)}>Cancel Order</button>
+         </i>
+
+                
+          <h1 className="last-name">{lastName}</h1>
+          <i style={{textAlign: 'center'}}> {number}</i><br></br>
+          <p style={{fontSize: "0.7rem"}}>Started at: {startTime}</p>
+          <p style={{fontSize: "1.3rem", margin: "0 0"}}>Elapsed time: {timer}</p>
+          <button name="complete" onClick={(e) => {handleComplete(e)}}>Complete Order</button>      
+      </div>
       </div>
        )
        case 'canceled':
-         return (<div>
-           canceled
-         </div>)
+         return (
+          <div className={`dashboard-item canceled ${props.uid}`} >
+        <div className="item-content" >
+          <i style={{fontSize: "0.8rem"}}>Order #: {props.uid} </i>
+          <div style={{fontSize: "3rem"}}><b>Canceled</b></div>
+          <div style={{fontSize: "1.2rem"}}> 
+            <b >{lastName}</b>
+            <i style={{float: 'right'}}> {number}</i>
+          </div>
+          <p style={{fontSize: "0.8rem"}}>
+          <div>Started at: <span style={{float: 'right'}}>{startTime}</span></div>
+          <div>Ended at: <span style={{float: 'right'}}>{endTime}</span></div>
+          </p>
+          <p style={{margin: "0 0"}}>Time Elapsed: <span style={{float: 'right'}}>{timer}</span></p>
+        </div>
+        </div>
+         )
       default:
         return (
-        <>
-          <h2>completed</h2>
-          <p>{firstName} {lastName} {number}</p>
-          <p>Start time: {startTime}</p>
-          <p>End time: {endTime}</p>
-          <p>Time Elapsed: {seconds}</p>
-          <h2>{props.uid}</h2>
-        </>
+          <div className={`dashboard-item completed ${props.uid}`} >
+          <div className="item-content" >
+          <i style={{fontSize: "0.8rem"}}>Order #: {props.uid} </i>
+          <div style={{fontSize: "3rem", fontWeight:"lighter"}}><i>Completed!</i></div>
+          <div style={{fontSize: "1.2rem"}}> 
+            <b >{lastName}</b>
+            <i style={{float: 'right'}}> {number}</i>
+          </div>
+          <p style={{fontSize: "0.8rem"}}>
+          <div>Started at: <span style={{float: 'right'}}>{startTime}</span></div>
+          <div>Ended at: <span style={{float: 'right'}}>{endTime}</span></div>
+          </p>
+          <p style={{margin: "0 0"}}>Time Elapsed: <span style={{float: 'right'}}>{timer}</span></p>
+        </div>
+        </div>
         )
     }
 
@@ -93,10 +118,9 @@ export default function DashboardItem(props) {
 
 
   return (
-    <div className={`dashboard-item ${props.uid}`} >
+    <>
      {content()}
-    </div>
-
+    </>
   )
 
 }
