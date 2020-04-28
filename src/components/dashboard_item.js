@@ -61,16 +61,16 @@ export default function DashboardItem(props) {
         <form className="item-content" onSubmit={(e) => handleSubmit(e)}>
           <label><i style={{fontSize: "0.8rem"}}>Order #: {props.uid} </i></label>
           <label>Last Name</label>
-          <input required  type='text' name="lastName" placeholder="Johnson" onChange={handleInputChange} ></input>
+          <input required  type='text' name="lastName" onChange={handleInputChange} ></input>
           <label>Phone Number</label>
           <div>
-          <input required type='tel' size="3" minLength="3" maxLength="3" pattern="\d{3}" name="number1" placeholder="123" 
+          <input required type='tel' size="3" minLength="3" maxLength="3" pattern="\d{3}" name="number1" 
           onChange={handleInputChange}
           onKeyUp={handleKeyUp}></input>
-          <input required type='tel' size="3" minLength="3" maxLength="3" pattern="\d{3}" name="number2" placeholder="456" 
+          <input required type='tel' size="3" minLength="3" maxLength="3" pattern="\d{3}" name="number2" 
           onChange={handleInputChange}
           onKeyUp={handleKeyUp}></input>
-          <input required type='tel' size="4 " minLength="4" maxLength="4" pattern="\d{4}" name="number3" placeholder="7890" 
+          <input required type='tel' size="4 " minLength="4" maxLength="4" pattern="\d{4}" name="number3" 
           onChange={handleInputChange}></input>
           </div>
           <input type="submit" value="Submit" ></input>
