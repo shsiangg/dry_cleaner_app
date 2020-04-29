@@ -18,8 +18,11 @@ export default function DashboardItem(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    let number =  e.target.number1.value + 
+                  e.target.number2.value + 
+                  e.target.number3.value
     setLastName(e.target.lastName.value)
-    setNumber(e.target.number.value)
+    setNumber(number)
     setItemState('submit')
     setStartTime(new Date().toLocaleString())
     
