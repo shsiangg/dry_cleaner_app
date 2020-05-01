@@ -7,17 +7,18 @@
 
 .dashboard-item {
   display: grid;
-  grid-template-columns: 1fr 60% 1fr;
+  grid-template-columns: minmax(0, 1fr) 300px minmax(0, 1fr);
   justify-content: center;
   border-radius: 20px;
-
+  -webkit-box-shadow: -5px 25px 81px -59px rgba(0,0,0,0.75);
+  -moz-box-shadow: -5px 25px 81px -59px rgba(0,0,0,0.75);
+  box-shadow: -5px 25px 81px -59px rgba(0,0,0,0.75);
 }
 
 .dashboard-item.empty {
   background: white;
-  border: 0.5px solid #e6e6e6 ;
-}
 
+}
 .dashboard-item.submitted {
   background: #ace9f8;
 }
@@ -31,6 +32,7 @@
 }
 
 .item-content {
+  
   grid-column: 2 / 3;
   display: grid;
   align-items: center;
@@ -55,9 +57,9 @@ input[type=text] {
 
 input[type=tel] {
   width: auto;
-  padding: 12px 20px;
+  padding: 12px 12px;
   font-size: 1rem;
-  margin-right: 0.1rem;
+  margin-right: 0.4rem;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;

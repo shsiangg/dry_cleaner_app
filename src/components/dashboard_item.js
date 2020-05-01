@@ -47,10 +47,10 @@ export default function DashboardItem(props) {
   }, itemState === 'complete' ? null : (itemState === 'submit' ? 1000 : null) );
 
 
-  const handleKeyUp = (e) => {
+  const handleKeyUp = (e, uid) => {
     if (e.target.value.length === e.target.maxLength) {
-      let num2 = document.querySelector("input[name='number2']")
-      let num3 = document.querySelector("input[name='number3']")
+      let num2 = document.querySelector(`div.dashboard-item.empty.item-${uid} > form > div > input[name='number2']`)
+      let num3 = document.querySelector(`div.dashboard-item.empty.item-${uid} > form > div > input[name='number3']`)
       e.target.name === 'number1' ? num2.focus() : num3.focus()
     }
     
@@ -60,7 +60,7 @@ export default function DashboardItem(props) {
     switch (itemState) {
       case 'empty':
         return (
-          <div className={`dashboard-item empty ${props.uid}`} >
+          <div className={`dashboard-item empty item-${props.uid}`} >
         <form className="item-content" onSubmit={(e) => handleSubmit(e)}>
           <label><i style={{fontSize: "0.8rem"}}>Order #: {props.uid} </i></label>
           <label>Last Name</label>
@@ -69,11 +69,11 @@ export default function DashboardItem(props) {
           <div>
           <input required type='tel' size="3" minLength="3" maxLength="3" pattern="\d{3}" name="number1" 
           onChange={handleInputChange}
-          onKeyUp={handleKeyUp}></input>
+          onKeyUp={(e) => handleKeyUp(e, props.uid)}></input>
           <input required type='tel' size="3" minLength="3" maxLength="3" pattern="\d{3}" name="number2" 
           onChange={handleInputChange}
-          onKeyUp={handleKeyUp}></input>
-          <input required type='tel' size="4 " minLength="4" maxLength="4" pattern="\d{4}" name="number3" 
+          onKeyUp={(e) => handleKeyUp(e, props.uid)}></input>
+          <input required type='tel' size="5" minLength="4" maxLength="4" pattern="\d{4}" name="number3" 
           onChange={handleInputChange}></input>
           </div>
           <input type="submit" value="Submit" ></input>
